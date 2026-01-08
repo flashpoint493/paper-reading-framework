@@ -3,18 +3,24 @@
 删除 data/ 下已废弃的空目录
 """
 
+import sys
 from pathlib import Path
+
+# 添加项目根目录到路径
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 def cleanup_obsolete_dirs():
     """清理废弃的空目录"""
     
-    # 要删除的废弃目录
+    # 要删除的废弃目录（相对于项目根目录）
+    project_root = Path(__file__).parent.parent.parent
     obsolete_dirs = [
-        "data/notes",
-        "data/code",
-        "data/summaries",
-        "data/guides",
-        # "data/knowledge",  # 可选：如果不需要全局知识图谱，取消注释
+        project_root / "data/notes",
+        project_root / "data/code",
+        project_root / "data/summaries",
+        project_root / "data/guides",
+        # project_root / "data/knowledge",  # 可选：如果不需要全局知识图谱，取消注释
     ]
     
     print("=" * 60)
@@ -25,7 +31,7 @@ def cleanup_obsolete_dirs():
     skipped_count = 0
     
     for dir_path in obsolete_dirs:
-        path = Path(dir_path)
+        path = Path(dir_path) if not isinstance(dir_path, Path) else dir_path
         
         if not path.exists():
             print(f"[跳过] 目录不存在: {dir_path}")

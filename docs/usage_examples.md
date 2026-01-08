@@ -7,7 +7,7 @@
 首先，让我们测试一下从 SIGGRAPH 网站获取信息的功能（无需 API Key）：
 
 ```bash
-python quick_start.py
+python src/scripts/quick_start.py
 ```
 
 或者使用主程序：

@@ -42,7 +42,11 @@ python src/main.py analyze papers/your_paper.pdf --type implementation
 ### 方式 3: 获取 SIGGRAPH 信息
 
 ```bash
+# 使用主程序
 python src/main.py fetch
+
+# 或使用快速启动脚本
+python src/scripts/quick_start.py
 ```
 
 ## 📁 准备论文文件

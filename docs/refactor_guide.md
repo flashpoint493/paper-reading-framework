@@ -12,8 +12,8 @@ Architechture/
 ├── scripts/                 # 工具脚本（新建）
 │   ├── main.py             # 主程序（从 src/main.py 移动）
 │   ├── download_and_analyze.py
-│   ├── quick_start.py
-│   └── test_api.py
+│   ├── src/scripts/quick_start.py
+│   └── tests/test_api.py
 ├── config/                  # 配置文件（新建）
 │   └── config.yaml         # 配置文件（从根目录移动）
 ├── data/                    # 产出数据（新建，已部分完成）
@@ -62,8 +62,8 @@ mv config.yaml config/config.yaml  # 如果存在
 # 移动脚本文件
 mv src/main.py scripts/main.py
 mv download_and_analyze.py scripts/  # 如果存在
-mv quick_start.py scripts/
-mv test_api.py scripts/
+mv quick_start.py src/scripts/
+mv test_api.py tests/
 
 # 移动文档文件（已统一重命名为小写）
 # 注意：README.md 和 START_HERE.md 保留在根目录

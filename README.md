@@ -6,20 +6,30 @@
 
 ```
 Architechture/
-├── src/                   # 源代码
-│   ├── api/               # Moonshot AI 客户端
-│   ├── paper/             # 论文处理模块
-│   ├── knowledge/         # 知识内化模块
-│   ├── reading/           # 辅助阅读（术语/导读）
-│   └── implementation/    # 代码生成模块
 ├── docs/                  # 详细文档
 │   ├── api_setup.md       # API 配置指南
 │   ├── usage_examples.md  # 使用示例
 │   └── ...                # 其他文档
 ├── config.yaml            # 配置文件
-├── quick_start.py         # 快速测试 SIGGRAPH 信息获取（无需 API Key）
-├── test_api.py            # 测试 Moonshot API 连接
-├── test_arm_paper.py      # 测试 arXiv 下载
+├── src/                   # 源代码
+│   ├── scripts/           # 工具脚本
+│   │   ├── quick_start.py         # 快速测试 SIGGRAPH 信息获取
+│   │   ├── redownload_paper.py   # 重新下载论文
+│   │   ├── cleanup_obsolete_dirs.py  # 清理废弃目录
+│   │   └── setup_skill_structure.py   # 设置技能结构
+│   ├── api/               # Moonshot AI 客户端
+│   ├── paper/             # 论文处理模块
+│   ├── knowledge/         # 知识内化模块
+│   ├── reading/           # 辅助阅读（术语/导读）
+│   └── implementation/    # 代码生成模块
+├── tests/                 # 测试脚本
+│   ├── test_api.py        # 测试 Moonshot API 连接
+│   ├── test_arm_paper.py  # 测试 arXiv 下载
+│   └── test_pdf_parse.py  # 测试 PDF 解析
+├── scripts/               # 发布脚本
+│   ├── publish_now.ps1    # 一键发布脚本
+│   ├── publish_to_github.ps1  # GitHub 发布
+│   └── publish_to_pypi.ps1    # PyPI 发布
 ├── data/                  # 产出数据（所有生成的内容）
 │   ├── papers/           # 论文工作空间（按论文ID组织）
 │   ├── notes/            # 笔记（兼容旧结构）

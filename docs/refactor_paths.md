@@ -12,8 +12,8 @@ Architechture/
 ├── scripts/                 # 工具脚本
 │   ├── main.py
 │   ├── download_and_analyze.py
-│   ├── quick_start.py
-│   └── test_api.py
+│   ├── src/scripts/quick_start.py
+│   └── tests/test_api.py
 ├── config/                  # 配置文件
 │   └── config.yaml
 ├── data/                    # 产出数据（所有生成的内容）

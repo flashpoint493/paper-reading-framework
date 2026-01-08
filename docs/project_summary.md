@@ -72,7 +72,15 @@ Architechture/
 │   └── main.py                  # 主程序
 ├── config.yaml                   # 配置文件
 ├── requirements.txt              # 依赖包
-├── quick_start.py               # 快速开始脚本
+├── src/scripts/                 # 工具脚本
+│   ├── quick_start.py           # 快速开始脚本
+│   ├── redownload_paper.py      # 重新下载论文
+│   └── cleanup_obsolete_dirs.py # 清理废弃目录
+├── tests/                       # 测试脚本
+│   ├── test_api.py              # 测试 API
+│   ├── test_arm_paper.py        # 测试 arXiv 下载
+│   └── test_pdf_parse.py        # 测试 PDF 解析
+├── scripts/                     # 发布脚本
 ├── README.md                    # 主文档
 ├── START_HERE.md                # 快速开始指南
 └── docs/                        # 详细文档目录
