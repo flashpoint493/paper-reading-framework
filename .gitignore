@@ -10,6 +10,8 @@ ENV/
 build/
 dist/
 *.egg-info/
+# 注意：dist/ 目录包含构建的包，通常不提交到 git
+# 如果需要保留构建历史，可以移除 dist/ 这一行
 .eggs/
 
 # 环境变量和敏感配置
