@@ -1,0 +1,60 @@
+"""
+从 arXiv 下载论文并进行分析
+"""
+
+import sys
+from pathlib import Path
+
+# 添加项目根目录到路径
+sys.path.insert(0, str(Path(__file__).parent))
+
+from src.paper.fetcher import PaperFetcher
+from src.main import main as run_full_analysis
+import argparse
+
+
+def download_and_analyze(arxiv_url: str):
+    """
+    下载 arXiv 论文并运行完整分析
+    
+    Args:
+        arxiv_url: arXiv 论文 URL 或 ID
+    """
+    print("=" * 60)
+    print("arXiv 论文下载和分析")
+    print("=" * 60)
+    print(f"\n论文链接: {arxiv_url}\n")
+    
+    # 下载论文
+    print("步骤 1/2: 下载论文...")
+    fetcher = PaperFetcher()
+    paper_path = fetcher.download_arxiv_paper(arxiv_url)
+    
+    if not paper_path:
+        print("\n[ERROR] 论文下载失败，请检查链接是否正确")
+        return
+    
+    print(f"\n[OK] 论文已下载: {paper_path}\n")
+    
+    # 运行完整分析
+    print("=" * 60)
+    print("步骤 2/2: 开始完整分析...")
+    print("=" * 60)
+    print()
+    
+    # 构建命令行参数
+    sys.argv = ['src/main.py', 'full', str(paper_path)]
+    
+    try:
+        run_full_analysis()
+    except SystemExit:
+        pass  # argparse 会调用 sys.exit()
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("使用方法: python download_and_analyze.py <arxiv_url>")
+        print("示例: python download_and_analyze.py https://arxiv.org/abs/2504.12908")
+        sys.exit(1)
+    
+    download_and_analyze(sys.argv[1])
