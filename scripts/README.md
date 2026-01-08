@@ -13,7 +13,7 @@
 ### PowerShell
 
 ```powershell
-# 一键发布
+# 一键发布（GitHub + PyPI）
 .\scripts\publish_now.ps1
 
 # 单独发布 GitHub
@@ -22,6 +22,12 @@
 # 单独发布 PyPI
 .\scripts\publish_to_pypi.ps1
 ```
+
+### 脚本说明
+
+- **publish_now.ps1**: 一键发布脚本，自动处理 GitHub 和 PyPI 发布流程
+- **publish_to_github.ps1**: 仅发布到 GitHub，需要先创建仓库
+- **publish_to_pypi.ps1**: 仅发布到 PyPI，需要 API token
 
 ## 注意事项
 
