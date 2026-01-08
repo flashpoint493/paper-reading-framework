@@ -148,6 +148,27 @@ python analyze_arxiv_paper.py 2301.12345
 
 详细说明请查看 [辅助阅读功能文档](docs/assistant_reading_feature.md)
 
+## 📦 安装
+
+### 从 PyPI 安装（推荐）
+
+```bash
+pip install paper-reading-framework
+```
+
+### 从源码安装
+
+```bash
+git clone https://github.com/flashpoint493/paper-reading-framework.git
+cd paper-reading-framework
+pip install -e .
+```
+
 ## 📄 许可证
 
 本项目仅供学习和研究使用。
+
+## 🔗 相关链接
+
+- **GitHub**: https://github.com/flashpoint493/paper-reading-framework
+- **PyPI**: https://pypi.org/project/paper-reading-framework/
