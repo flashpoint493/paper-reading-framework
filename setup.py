@@ -25,7 +25,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Ocarina",
     author_email="ocarina1024@gmail.com",
-    url="https://github.com/ocarina1024/paper-reading-framework",
+    url="https://github.com/flashpoint493/paper-reading-framework",
     packages=find_packages(exclude=["tests", "tests.*", "docs", "docs.*"]),
     include_package_data=True,
     install_requires=requirements,
@@ -50,8 +50,9 @@ setup(
     },
     keywords="paper reading, academic research, AI analysis, Moonshot, Kimi",
     project_urls={
-        "Documentation": "https://github.com/ocarina1024/paper-reading-framework",
-        "Source": "https://github.com/ocarina1024/paper-reading-framework",
-        "Tracker": "https://github.com/ocarina1024/paper-reading-framework/issues",
+        "Documentation": "https://github.com/flashpoint493/paper-reading-framework",
+        "Source": "https://github.com/flashpoint493/paper-reading-framework",
+        "Tracker": "https://github.com/flashpoint493/paper-reading-framework/issues",
+        "Changelog": "https://github.com/flashpoint493/paper-reading-framework/releases",
     },
 )
