@@ -46,6 +46,7 @@ setup(
     entry_points={
         "console_scripts": [
             "paper-reading=src.main:main",
+            "paper-reading-init=src.cli.install:main",
         ],
     },
     keywords="paper reading, academic research, AI analysis, Moonshot, Kimi",

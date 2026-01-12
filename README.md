@@ -69,9 +69,22 @@ moonshot:
 
 ### 使用示例
 
-#### 方式 1: Claude Code Skill（推荐）
+#### 方式 1: 使用 CLI 安装技能（推荐）
 
-在 Claude Code 中，直接使用技能：
+首先安装技能到你的 AI 助手：
+
+```bash
+# 安装到 Claude Code
+paper-reading-init --ai claude
+
+# 或安装到所有 AI 助手
+paper-reading-init --ai all
+
+# 查看所有支持的 AI 助手
+paper-reading-init list
+```
+
+然后在 Claude Code 中直接使用技能：
 
 ```
 Analyze paper 2301.12345 and generate implementation code
