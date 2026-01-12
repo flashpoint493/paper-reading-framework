@@ -1,0 +1,50 @@
+# Moonshot AI API Configuration (China version)
+# API Documentation: https://platform.moonshot.cn/docs/guide/start-using-kimi-api
+# Copy this file to config.yaml and fill in your API Key
+moonshot:
+  api_key: "your-api-key-here"  # Fill in your API Key here, or use environment variable MOONSHOT_API_KEY
+  base_url: "https://api.moonshot.cn/v1"  # China API endpoint
+  model: "moonshot-v1-32k"  # Options: moonshot-v1-8k, moonshot-v1-32k, moonshot-v1-128k
+  temperature: 0.7  # Temperature parameter, controls output randomness
+  max_tokens: 4096  # Maximum generation tokens
+
+# Paper Reading Configuration
+paper_reading:
+  # Input paper directory (keep clean, only original PDFs)
+  papers_dir: "papers"
+
+  # New directory structure: All outputs isolated by paper, unified under `paper_workspace_dir`
+  # Example: data/papers/2411.10825/notes, data/papers/2411.10825/summaries ...
+  paper_workspace_dir: "data/papers"
+
+  # Legacy structure (used when paper_workspace_dir is not set)
+  notes_dir: "data/notes"
+  code_dir: "data/code"
+  summaries_dir: "data/summaries"
+  knowledge_dir: "data/knowledge"
+  guides_dir: "data/guides"
+
+  # Analysis configuration
+  extract_sections:
+    - "abstract"
+    - "introduction"
+    - "methodology"
+    - "results"
+    - "conclusion"
+    - "references"
+
+  # Internalization configuration
+  knowledge_base:
+    format: "markdown"  # Note format: markdown, json
+    include_code: true
+    include_diagrams: true
+
+# SIGGRAPH Configuration
+siggraph:
+  base_url: "https://www.siggraph.org"
+  papers_url: "https://www.siggraph.org/publications"
+  download_dir: "papers/siggraph"
+  # Windows + PowerShell may trigger SSL errors in some network environments when directly connecting to https;
+  # Setting UA and prioritizing http entry can improve success rate
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+  verify_ssl: true
