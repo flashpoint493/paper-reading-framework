@@ -1,0 +1,92 @@
+# Paper Reading Skill - 论文阅读技能
+
+## 快速使用
+
+当用户需要下载和分析 arXiv 论文时，可以使用以下方式：
+
+### 方式 1: 使用 Python API（推荐）
+
+```python
+from skills.paper_reading.scripts.paper_skill import PaperSkill
+
+# 创建技能实例
+skill = PaperSkill()
+
+# 一键下载和分析
+result = skill.download_and_analyze("2405.11694")
+# 或使用 URL
+result = skill.download_and_analyze("https://arxiv.org/abs/2405.11694")
+
+# 结果包含：
+# - paper_path: 论文文件路径
+# - note_path: 笔记文件路径
+# - summary_path: 摘要文件路径
+# - code_dir: 代码项目目录
+# - reading_guide_path: 阅读指南路径
+```
+
+### 方式 2: 使用命令行
+
+```bash
+# 完整流程（下载 + 分析 + 代码生成）
+python skills/paper_reading/scripts/paper_skill.py 2405.11694
+
+# 仅下载
+python skills/paper_reading/scripts/paper_skill.py 2405.11694 --action download
+
+# 仅分析（需要先下载）
+python skills/paper_reading/scripts/paper_skill.py 2405.11694 --action analyze --type summary
+```
+
+### 方式 3: 使用主程序
+
+```bash
+# 下载
+python src/main.py download https://arxiv.org/abs/2405.11694
+
+# 完整分析
+python src/main.py full papers/2405.11694/paper.pdf
+
+# 快速分析
+python src/main.py analyze papers/2405.11694/paper.pdf --type summary
+```
+
+## 输出文件位置
+
+所有生成的文件都在 `data/papers/<paper_id>/` 目录下：
+- `notes/` - 笔记文件
+- `summaries/` - 摘要文件
+- `code/` - 代码项目
+- `guides/` - 阅读指南
+- `knowledge/` - 知识图谱
+
+## 常用操作
+
+1. **下载并完整分析一篇论文**：
+   ```python
+   from skills.paper_reading.scripts.paper_skill import PaperSkill
+   skill = PaperSkill()
+   result = skill.download_and_analyze("2405.11694")
+   ```
+
+2. **仅获取快速摘要**：
+   ```python
+   from skills.paper_reading.scripts.paper_skill import PaperSkill
+   skill = PaperSkill()
+   summary = skill.quick_summary("2405.11694")
+   print(summary)
+   ```
+
+3. **分析已有论文**：
+   ```python
+   from skills.paper_reading.scripts.paper_skill import PaperSkill
+   skill = PaperSkill()
+   result = skill.analyze_paper("papers/2405.11694/paper.pdf", "summary")
+   ```
+
+## 注意事项
+
+- API Key 需要在 `config.yaml` 中配置
+- 论文会自动下载到 `papers/<paper_id>/paper.pdf`
+- 分析结果保存在 `data/papers/<paper_id>/` 目录
+- 大论文建议使用 `moonshot-v1-128k` 模型（在 config.yaml 中修改）

@@ -4,10 +4,12 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
+![PyPI Version](https://img.shields.io/pypi/v/paper-reading-framework.svg)
+![PyPI Downloads](https://img.shields.io/pypi/dm/paper-reading-framework.svg)
 
 **使用 Moonshot AI (Kimi) 进行论文的精度阅读、内化和落地的完整框架**
 
-[快速开始](#-快速开始) • [功能特性](#-功能特性) • [文档](#-文档) • [安装](#-安装)
+[快速开始](#-快速开始) • [功能特性](#-功能特性) • [文档](#-文档) • [安装](#-安装) • [贡献](#-贡献)
 
 </div>
 
@@ -42,7 +44,7 @@ pip install paper-reading-framework
 # 或从源码安装
 git clone https://github.com/flashpoint493/paper-reading-framework.git
 cd paper-reading-framework
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 配置
@@ -75,7 +77,24 @@ moonshot:
 Analyze paper 2301.12345 and generate implementation code
 ```
 
-#### 方式 2: 命令行
+#### 方式 2: Python API
+
+```python
+from skills.paper_reading.scripts.paper_skill import PaperSkill
+
+# 创建技能实例
+skill = PaperSkill()
+
+# 一键下载和分析
+result = skill.download_and_analyze("2301.12345")  # arXiv ID
+
+# 查看结果
+print(f"笔记: {result['note_path']}")
+print(f"代码: {result['code_dir']}")
+print(f"摘要: {result['summary_path']}")
+```
+
+#### 方式 3: 命令行
 
 ```bash
 # 完整流程（下载 + 分析 + 代码生成）
@@ -86,13 +105,26 @@ python .claude/skills/paper-reading/scripts/paper_skill.py 2301.12345 --action d
 
 # 仅分析
 python .claude/skills/paper-reading/scripts/paper_skill.py 2301.12345 --action analyze --type summary
+
+# 或使用主程序
+python src/main.py download https://arxiv.org/abs/2301.12345
+python src/main.py full papers/2301.12345/paper.pdf
+```
+
+#### 方式 4: 直接分析 arXiv URL
+
+```bash
+# 当 PDF 无法提取文本时，可直接使用 arXiv URL
+python src/scripts/analyze_arxiv.py 2301.12345
 ```
 
 ## 📖 文档
 
 - 📘 [CLAUDE.md](CLAUDE.md) - Claude Code 使用指南
 - 📗 [SKILL.md](.claude/skills/paper-reading/SKILL.md) - 技能详细说明
-- 📙 [配置指南](config.yaml.example) - 配置文件示例
+- 📙 [快速开始指南](START_HERE.md) - 新手入门必读（如果存在）
+- 📕 [Paper Skill 使用指南](skills/paper_reading/skill.md) - AI IDE 集成（如果存在）
+- 📓 [API 配置指南](docs/api_setup.md) - Moonshot API 配置（如果存在）
 
 ## 🏗️ 项目结构
 
@@ -104,17 +136,20 @@ paper-reading-framework/
 │           ├── SKILL.md         # 技能定义
 │           └── scripts/
 │               └── paper_skill.py  # 主入口脚本
-├── original_code/              # 原始源代码（如果存在）
-│   ├── src/                    # 核心源代码
-│   │   ├── api/                # Moonshot AI 客户端
-│   │   ├── paper/              # 论文处理（下载、解析）
-│   │   ├── knowledge/          # 知识内化（笔记、图谱）
-│   │   ├── reading/            # 辅助阅读（术语、指南）
-│   │   └── implementation/     # 代码生成
-│   └── config.yaml.example     # 配置模板
-├── CLAUDE.md                   # Claude Code 项目指导
-├── .gitignore                  # Git 忽略文件
-└── config.yaml.example         # 配置模板
+├── src/                      # 核心源代码
+│   ├── api/                  # Moonshot AI 客户端
+│   ├── paper/                # 论文处理（下载、解析）
+│   ├── knowledge/            # 知识内化（笔记、图谱）
+│   ├── reading/              # 辅助阅读（术语、指南）
+│   ├── implementation/       # 代码生成
+│   └── scripts/              # 工具脚本
+├── tests/                    # 测试脚本
+├── scripts/                  # 发布脚本
+├── docs/                     # 详细文档
+├── skills/                   # Paper Skill 模块
+├── CLAUDE.md                 # Claude Code 项目指导
+├── .gitignore                # Git 忽略文件
+└── config.yaml.example       # 配置模板
 ```
 
 ## 🎨 使用场景
@@ -136,8 +171,15 @@ paper-reading-framework/
 
 ## 📊 工作流程
 
-```
-论文 URL/ID → 下载论文 → 解析 PDF → AI 分析 → 生成笔记 → 生成代码
+```mermaid
+graph LR
+    A[论文 URL/ID] --> B[下载论文]
+    B --> C[解析 PDF]
+    C --> D[AI 分析]
+    D --> E[生成笔记]
+    D --> F[生成摘要]
+    D --> G[生成代码]
+    D --> H[更新知识图谱]
 ```
 
 ## 🔧 配置选项
@@ -151,6 +193,15 @@ moonshot:
   model: "moonshot-v1-8k"    # 短论文（< 8K tokens）
   model: "moonshot-v1-32k"   # 中等论文（8K-32K tokens）
   model: "moonshot-v1-128k"  # 长论文（> 32K tokens）
+```
+
+### 读者配置
+
+```yaml
+reader_profile:
+  type: "amateur"  # 或 "professional"
+  background: "软件工程背景、高等数学基础"
+  needs_guidance: true
 ```
 
 ## 📦 安装
@@ -193,6 +244,7 @@ pip install -r requirements.txt
 ## 🔗 相关链接
 
 - **GitHub**: [flashpoint493/paper-reading-framework](https://github.com/flashpoint493/paper-reading-framework)
+- **PyPI**: [paper-reading-framework](https://pypi.org/project/paper-reading-framework/)
 - **Moonshot AI**: [平台文档](https://platform.moonshot.cn/docs/guide/start-using-kimi-api)
 
 ## ⭐ 致谢
